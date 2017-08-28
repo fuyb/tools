@@ -1,0 +1,20 @@
+[Unit]
+Description=PB Service
+Requires=pb.socket
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/opt/gunicorn/pb.pid
+User=fyb
+Group=fyb
+WorkingDirectory=/opt/pb
+ExecStartPre=/bin/mkdir -p /opt/gunicorn/
+ExecStart=/bin/gunicorn --pid /opt/gunicorn/pb.pid --config /opt/pb/gunicorn.conf run:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=True
+
+[Install]
+WantedBy=multi-user.target
+
