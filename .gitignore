@@ -1,0 +1,5 @@
+elimage.db
+*~
+*.bak
+.*.swp
+__pycache__/
