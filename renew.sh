@@ -8,7 +8,10 @@ cd /opt/letsencrypt/
 if [ $? -ne 0 ]
  then
         ERRORLOG=`tail /var/log/letsencrypt/letsencrypt.log`
-        echo -e "The Lets Encrypt Cert has not been renewed! \n \n" $ERRORLOG | mail -s "Lets Encrypt Cert Alert" postmaster@yourdomain.com
+        echo -e "The Lets Encrypt Cert has not been renewed! \n \n" $ERRORLOG | \
+               mail -s "Lets Encrypt Cert Alert" been1986@gmail.com
+else 
+        systemctl reload nginx
 fi
 
 exit 0
